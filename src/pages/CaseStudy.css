@@ -1,3 +1,24 @@
+.cs-back {
+  position: fixed;
+  top: 32px;
+  left: 36px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cs-back:hover {
+  background: #f0f0f0;
+}
+
 .cs-page {
   background: #ffffff;
   min-height: 100svh;
@@ -46,13 +67,12 @@
 }
 
 .cs-heading {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
+  font-family: 'Schibsted Grotesk', sans-serif;
+  font-weight: 900;
   font-size: 64px;
   line-height: 0.94;
-  letter-spacing: -0.64px;
+  letter-spacing: -1.92px;
   color: #1a1a1a;
-  font-variation-settings: 'opsz' 96, 'wdth' 100;
   margin: 0;
 }
 

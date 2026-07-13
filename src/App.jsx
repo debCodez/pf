@@ -123,7 +123,7 @@ function App() {
         className="card card--clickable"
         style={{ zIndex: 2 }}
         ref={el => cardRefs.current[1] = el}
-        onClick={() => navigate('/case-study/zylo-repayments')}
+        onClick={() => navigate('/case-study/vera-repayments')}
       >
         <p className="prompt-text">
           Users earn points for repaying credit card bills. Make it delightful.

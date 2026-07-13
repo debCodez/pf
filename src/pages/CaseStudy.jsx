@@ -1,23 +1,36 @@
+import { useNavigate } from 'react-router-dom'
 import './CaseStudy.css'
-import phone1 from '../assets/phone1.png'
-import phone2 from '../assets/phone2.png'
-import phone3 from '../assets/phone3.png'
-import phone4 from '../assets/phone4.png'
+import img1 from '../assets/1.png'
+import img2 from '../assets/2.png'
+import img3 from '../assets/3.png'
 
 export default function CaseStudy() {
+  const navigate = useNavigate()
   return (
     <div className="cs-page">
+      <button className="cs-back" onClick={() => navigate('/')} aria-label="Back to home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
       <div className="cs-content">
 
         <div className="cs-brief">
-          <span className="cs-quote">"</span>
+          {/* <span className="cs-quote">"</span> */}
           <p className="cs-brief-text">
             When users repay their credit card bill, they earn reward points.
             Make this experience delightful
           </p>
         </div>
 
-        <img src={phone1} alt="App screen — initial concept" className="cs-mockup" />
+        <video
+          src="/RepaymentReward.mp4"
+          className="cs-mockup"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
 
         <h2 className="cs-heading">Backstory &amp; Process</h2>
 
@@ -27,10 +40,22 @@ export default function CaseStudy() {
           they're earning. So we wanted to make that moment count.
         </p>
         <p className="cs-body">
-          Our first idea was to animate around the reward programme logo. We even built it.
+          Our first idea was to animate around the reward programme logo. We even mocked it.
         </p>
 
-        <img src={phone2} alt="App screen — first iteration" className="cs-mockup" />
+        <video
+          src="/itr1.mp4"
+          className="cs-mockup"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+
+        <p className="cs-body">But, there were problems</p>
+
+        <img src={img1} alt="App screen — revised concept" className="cs-mockup" />
+        <img src={img2} alt="App screen — revised concept 2" className="cs-mockup" />
 
         <p className="cs-body">
           But when we looked at it, something felt off. It wasn't really showing the user what
@@ -40,9 +65,9 @@ export default function CaseStudy() {
           <li>How many points do I have, and</li>
           <li>How did this payment just make that number go up.</li>
         </ol>
-        <p className="cs-body">So we scrapped that and started fresh with a clearer idea.</p>
+        <p className="cs-body">So we scrapped the first cut and started fresh with a clearer storyboard.</p>
 
-        <img src={phone3} alt="App screen — revised concept" className="cs-mockup" />
+        
 
         <p className="cs-body">
           The new version walks the user through it simply. You had this many points, you made a
@@ -54,7 +79,7 @@ export default function CaseStudy() {
           few key frames to walk the team through the idea before final sign-off.
         </p>
 
-        <img src={phone4} alt="App screen — final design" className="cs-mockup" />
+        <img src={img3} alt="App screen — final design" className="cs-mockup" />
 
       </div>
     </div>
