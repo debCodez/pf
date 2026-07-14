@@ -1,3 +1,56 @@
+.cs-sidebar {
+  position: fixed;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  z-index: 10;
+}
+
+.cs-sidebar-item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #aaaaaa;
+  max-width: 160px;
+  cursor: default;
+  transition: color 0.15s ease;
+}
+
+.cs-sidebar-item[style*="pointer"] {
+  cursor: pointer;
+}
+
+.cs-sidebar-item[style*="pointer"]:hover {
+  color: #1a1a1a;
+}
+
+.cs-sidebar-item--active {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.cs-sidebar-dot {
+  position: fixed;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #1a1a1a;
+  pointer-events: none;
+  z-index: 11;
+}
+
+@media (max-width: 1100px) {
+  .cs-sidebar {
+    display: none;
+  }
+}
+
 .cs-back {
   position: fixed;
   top: 32px;
@@ -20,10 +73,16 @@
 }
 
 .cs-page {
+  /* Vars, not literals: .cs-mockup subtracts these to cap itself at one screen. */
+  --cs-pad-top: 160px;
+  --cs-pad-bottom: 120px;
   background: #ffffff;
   min-height: 100svh;
-  padding: 160px 36px 120px;
+  padding: var(--cs-pad-top) 36px var(--cs-pad-bottom);
   box-sizing: border-box;
+  /* clip (not hidden) contains mockups wider than the column without
+     making this a scroll container. */
+  overflow-x: clip;
 }
 
 .cs-content {
@@ -61,9 +120,24 @@
   margin: 0;
 }
 
+/* Break out of the 720px .cs-content column to 80% of the viewport, but never
+   grow taller than one screen — a mockup is always viewable without scrolling
+   through it. contain scales the asset down inside the box, preserving ratio.
+   margin-left centers on the column, translateX pulls back by half the width. */
 .cs-mockup {
-  width: 100%;
+  width: 80vw;
+  max-height: calc(100svh - var(--cs-pad-top) - var(--cs-pad-bottom));
+  height: auto;
+  object-fit: contain;
+  margin-left: 50%;
+  transform: translateX(-50%);
   display: block;
+}
+
+/* Opt out of the one-screen height cap. For very tall assets (storyboard strips),
+   the cap starves width — this trades scrolling for a readable size. */
+.cs-mockup--tall {
+  max-height: none;
 }
 
 .cs-heading {
@@ -97,7 +171,9 @@
 
 @media (max-width: 900px) {
   .cs-page {
-    padding: 80px 24px 80px;
+    --cs-pad-top: 80px;
+    --cs-pad-bottom: 80px;
+    padding: var(--cs-pad-top) 24px var(--cs-pad-bottom);
   }
 
   .cs-quote {

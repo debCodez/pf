@@ -51,7 +51,7 @@ function App() {
       clearTimeout(wheelTimer)
       wheelTimer = setTimeout(() => {
         const dir = lastDeltaY > 0 ? 1 : -1
-        const isJerk = peakDeltaY > 200
+        const isJerk = peakDeltaY > 400
         const next = isJerk
           ? (dir > 0 ? snapPoints.length - 1 : 0)
           : Math.max(0, Math.min(snapPoints.length - 1, currentIdx + dir))
