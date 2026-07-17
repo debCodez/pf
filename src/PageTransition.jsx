@@ -1,9 +1,13 @@
 import { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Lottie from './Lottie.jsx'
+import loaderAnimation from './assets/Loader-pofo.json'
 import './PageTransition.css'
 
 const SLIDE_MS = 550 // white sheet clip open / close (must match CSS transition)
-const HOLD_MS = 500 // how long the bare shader + loader stays visible
+const LOADER_IN_MS = 300 // loader fades in over the bare shader (must match CSS)
+const LOADER_PLAY_MS = 1000 // one full pass of Loader-pofo.json (30 frames @ 30fps)
+const LOADER_OUT_MS = 300 // loader fades back out (must match CSS)
 const DISSOLVE_OUT_MS = 300 // fade of the landing content at the start (must match CSS)
 const DISSOLVE_MS = 650 // fade of the white to reveal the case study
 
@@ -19,7 +23,8 @@ export function PageTransitionProvider({ children }) {
   const [behind, setBehind] = useState(false) // sheet under the landing content (opening phase)
   const [revealed, setRevealed] = useState(false) // sheet clipped open -> shader visible
   const [sealed, setSealed] = useState(false) // sheet closed to FULL white (covers the peeks too)
-  const [loading, setLoading] = useState(false) // spinner shown
+  const [loading, setLoading] = useState(false) // loader faded in
+  const [loaderMounted, setLoaderMounted] = useState(false) // lottie mounted -> starts playing
   const [dissolve, setDissolve] = useState(false) // white fading out -> case study dissolves in
   const busy = useRef(false)
 
@@ -36,6 +41,7 @@ export function PageTransitionProvider({ children }) {
     setRevealed(false)
     setSealed(false)
     setLoading(false)
+    setLoaderMounted(false)
     setDissolve(false)
 
     // 1. The shader peeks expand from the edges toward the center, immediately.
@@ -49,17 +55,25 @@ export function PageTransitionProvider({ children }) {
       setBehind(false)
     }, DISSOLVE_OUT_MS)
 
-    // 3. Loader over the bare shader.
-    setTimeout(() => setLoading(true), SLIDE_MS)
-
-    // 4. After the shader holds, close the sheet to full white (peeks too).
+    // 3. The sheet has finished clipping open — the screen is bare shader now.
+    //    Mount the loader (which starts it from frame 0) and fade it in.
     setTimeout(() => {
-      setLoading(false)
+      setLoaderMounted(true)
+      setLoading(true)
+    }, SLIDE_MS)
+
+    // 4. Once it has played through, dissolve the loader back out.
+    const loaderDone = SLIDE_MS + LOADER_IN_MS + LOADER_PLAY_MS
+    setTimeout(() => setLoading(false), loaderDone)
+
+    // 5. Only after the loader is gone, close the sheet to full white (peeks too).
+    setTimeout(() => {
+      setLoaderMounted(false)
       setRevealed(false)
       setSealed(true)
       setTimeout(() => {
         navigate(to) // case study mounts behind the full white
-        // 5. Slow dissolve: fade the white out so the case study content appears.
+        // 6. Slow dissolve: fade the white out so the case study content appears.
         raf2(() => setDissolve(true))
         setTimeout(() => {
           setActive(false)
@@ -69,7 +83,7 @@ export function PageTransitionProvider({ children }) {
           busy.current = false
         }, DISSOLVE_MS + 50)
       }, SLIDE_MS)
-    }, SLIDE_MS + HOLD_MS)
+    }, loaderDone + LOADER_OUT_MS)
   }, [navigate])
 
   useEffect(() => () => {
@@ -93,7 +107,9 @@ export function PageTransitionProvider({ children }) {
         <div className={cls} aria-hidden="true">
           <div className="transition-sheet" />
           <div className="transition-loader">
-            <span className="transition-spinner" />
+            {loaderMounted && (
+              <Lottie animationData={loaderAnimation} className="transition-spinner" loop={false} />
+            )}
           </div>
         </div>
       )}
