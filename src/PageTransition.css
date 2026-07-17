@@ -1,0 +1,71 @@
+.transition-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 100; /* transient overlay; unmounted after the transition */
+  pointer-events: all;
+}
+
+/* Opening phase: the sheet drops behind the landing content (but stays above
+   the shader, which is also -1 but earlier in the DOM) so its collapse plays
+   underneath the dissolving content instead of hiding it. */
+.transition-cover--behind {
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* White sheet. It starts covering only the middle, leaving the top (81px) and
+   footer (70px) shader peeks uncovered, so those peeks expand to full screen as
+   the sheet clips open toward the center. */
+.transition-sheet {
+  position: absolute;
+  inset: 0;
+  background: #fafafa;
+  opacity: 1;
+  clip-path: inset(81px 0 70px 0);
+  transition: clip-path 0.55s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s ease;
+}
+
+/* Shader peeks expand toward the center; white recedes to a center line. */
+.transition-cover--revealed .transition-sheet {
+  clip-path: inset(50% 0 50% 0);
+}
+
+/* Close to full white (covering the peeks) before dissolving to the case study. */
+.transition-cover--sealed .transition-sheet {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Final reveal: full white fades out so the case study dissolves in. */
+.transition-cover--dissolve .transition-sheet {
+  opacity: 0;
+}
+
+.transition-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.transition-cover--loading .transition-loader {
+  opacity: 1;
+}
+
+.transition-spinner {
+  width: 42px;
+  height: 42px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: transition-spin 0.8s linear infinite;
+}
+
+@keyframes transition-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

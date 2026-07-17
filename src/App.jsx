@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom'
-import { Warp } from '@paper-design/shaders-react'
+import { usePageTransition } from './PageTransition.jsx'
 import './App.css'
 
 const EXPERIENCE = [
@@ -9,26 +8,11 @@ const EXPERIENCE = [
 ]
 
 function App() {
-  const navigate = useNavigate()
+  const go = usePageTransition()
 
   return (
     <div className="landing">
-      <header className="landing-bar">
-        <Warp
-          className="landing-bar-shader"
-          colors={['#121212', '#ffffff', '#121212', '#ffffff']}
-          proportion={0.45}
-          softness={1}
-          distortion={0.25}
-          swirl={0.8}
-          swirlIterations={10}
-          shape="checks"
-          shapeScale={0.1}
-          speed={1}
-          scale={1}
-          rotation={0}
-        />
-      </header>
+      <header className="landing-bar" />
 
       <main className="landing-main">
         <section className="intro">
@@ -44,10 +28,10 @@ function App() {
         <section className="projects">
           <article
             className="project-card project-card--clickable"
-            onClick={() => navigate('/case-study/vera-repayments')}
+            onClick={() => go('/case-study/vera-repayments')}
           >
             <div className="project-text">
-              <h2 className="project-title">I have designed for Delight</h2>
+              <h2 className="project-title">Design for Delight</h2>
               <p className="project-desc">Enhanced the experience of rewards module for a US credit card app for near prime and prime users.</p>
             </div>
             <div className="project-media" />

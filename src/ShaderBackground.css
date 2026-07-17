@@ -1,0 +1,14 @@
+/* z-index:-1 puts the shader behind ALL normal-flow content (landing and case
+   study), so no page needs its own z-index to sit on top of it. */
+.shader-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.shader-fill {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

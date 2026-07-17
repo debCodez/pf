@@ -1,23 +1,38 @@
+/* Transparent; the shader (z-index:-1) shows through the header/footer windows,
+   while .landing-main paints an opaque surface over it. */
 .landing {
-  background: #fafafa;
   min-height: 100svh;
 }
 
-/* Shader bar across the top (black is the fallback before the canvas mounts) */
+/* Start of a transition: the sections dissolve out while the sheet (which sits
+   behind them during this phase) collapses at the same time. The white surface
+   is handed to the sheet so the collapse is visible through the fading content;
+   the sheet is the same colour and covers the same region, so the swap is
+   invisible. */
+body.landing-dissolving .landing-main {
+  background: transparent;
+}
+
+body.landing-dissolving .landing-main > * {
+  opacity: 0;
+  transition: opacity 0.3s ease; /* must match DISSOLVE_OUT_MS */
+}
+
+/* Once dissolved, hide the landing so the sheet clipping open reveals the
+   shader behind it, not this content. */
+body.is-transitioning .landing {
+  visibility: hidden;
+}
+
+/* Transparent window at the top — the background shader shows through here. */
 .landing-bar {
   height: 81px;
-  background: #000000;
-  overflow: hidden;
 }
 
-.landing-bar-shader {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+/* Opaque surface that covers the shader behind the main content. */
 .landing-main {
   padding: 80px 36px 120px;
+  background: #fafafa;
 }
 
 /* Intro ------------------------------------------------------------------ */
@@ -113,7 +128,8 @@
   width: 361px;
   align-self: stretch;
   min-height: 371px;
-  background: #000000;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
 }
 
 /* Experience list -------------------------------------------------------- */
@@ -149,9 +165,9 @@
 
 /* Footer ----------------------------------------------------------------- */
 
+/* Transparent window at the bottom — the background shader shows through here. */
 .landing-footer {
-  min-height: 240px;
-  background: #000000;
+  height: 70px;
 }
 
 @media (max-width: 980px) {
@@ -196,7 +212,7 @@
   }
 
   .landing-footer {
-    min-height: 180px;
+    height: 50px;
   }
 
   .landing-footer-text {

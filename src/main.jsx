@@ -8,19 +8,24 @@ import CaseStudyRedeem from './pages/CaseStudyRedeem.jsx'
 import CaseStudyCardLoader from './pages/CaseStudyCardLoader.jsx'
 import CaseStudyLayout from './pages/CaseStudyLayout.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
+import ShaderBackground from './ShaderBackground.jsx'
+import { PageTransitionProvider } from './PageTransition.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route element={<CaseStudyLayout />}>
-          <Route path="/case-study/vera-repayments" element={<CaseStudy />} />
-          <Route path="/case-study/redeem-points" element={<CaseStudyRedeem />} />
-          <Route path="/case-study/card-issuance" element={<CaseStudyCardLoader />} />
-        </Route>
-      </Routes>
+      <ShaderBackground />
+      <PageTransitionProvider>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route element={<CaseStudyLayout />}>
+            <Route path="/case-study/vera-repayments" element={<CaseStudy />} />
+            <Route path="/case-study/redeem-points" element={<CaseStudyRedeem />} />
+            <Route path="/case-study/card-issuance" element={<CaseStudyCardLoader />} />
+          </Route>
+        </Routes>
+      </PageTransitionProvider>
     </BrowserRouter>
   </StrictMode>,
 )
