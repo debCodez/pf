@@ -8,6 +8,7 @@ export default function CaseStudyRedeem() {
       <div className="cs-content">
 
         <div className="cs-brief">
+          <span className="cs-quote">&ldquo;</span>
           <p className="cs-brief-text">
             Redeeming reward points take time to process. Make the wait feel delightful. Not like a friction.
           </p>

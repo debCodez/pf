@@ -9,7 +9,7 @@ export default function CaseStudy() {
       <div className="cs-content">
 
         <div className="cs-brief">
-          {/* <span className="cs-quote">"</span> */}
+          <span className="cs-quote">&ldquo;</span>
           <p className="cs-brief-text">
             When users repay their credit card bill, they earn reward points.
             Make this experience delightful
