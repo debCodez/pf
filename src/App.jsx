@@ -28,7 +28,7 @@ function App() {
         <section className="projects">
           <article
             className="project-card project-card--clickable"
-            onClick={() => go('/case-study/vera-repayments')}
+            onClick={() => go('/case-study/overview')}
           >
             <div className="project-text">
               <h2 className="project-title">Design for Delight</h2>

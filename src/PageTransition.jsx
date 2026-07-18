@@ -60,7 +60,7 @@ export function PageTransitionProvider({ children }) {
     setTimeout(() => {
       setLoaderMounted(true)
       setLoading(true)
-    }, SLIDE_MS)
+    }, SLIDE_MS - 10)
 
     // 4. Once it has played through, dissolve the loader back out.
     const loaderDone = SLIDE_MS + LOADER_IN_MS + LOADER_PLAY_MS
