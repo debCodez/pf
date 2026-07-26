@@ -4,9 +4,9 @@ import './CaseStudy.css'
 
 const TABS = [
   { label: 'Overview', path: '/case-study/overview' },
-  { label: 'Bill payment experience', path: '/case-study/vera-repayments' },
-  { label: 'Redeem points experience', path: '/case-study/redeem-points' },
-  { label: 'Card issuance loading experience', path: '/case-study/card-issuance' },
+  { label: 'Points on bill payment', path: '/case-study/vera-repayments' },
+  { label: 'Redeeming reward points', path: '/case-study/redeem-points' },
+  { label: 'Card issuance loading animation', path: '/case-study/card-issuance' },
 ]
 
 export default function CaseStudyLayout() {

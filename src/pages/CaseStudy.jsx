@@ -1,4 +1,5 @@
 import './CaseStudy.css'
+import CaseStudyVideo from './CaseStudyVideo.jsx'
 import img1 from '../assets/1.png'
 import img2 from '../assets/2.png'
 import img3 from '../assets/3.1.png'
@@ -16,14 +17,7 @@ export default function CaseStudy() {
           </p>
         </div>
 
-        <video
-          src="/RepaymentReward.mp4"
-          className="cs-mockup"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <CaseStudyVideo src="/RepaymentFinal.mp4" />
 
         <h2 className="cs-heading">Backstory &amp; Process</h2>
 
@@ -36,19 +30,12 @@ export default function CaseStudy() {
           Our first idea was to animate around the reward programme logo. We even mocked it.
         </p>
 
-        <video
-          src="/itr1.mp4"
-          className="cs-mockup"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        <CaseStudyVideo src="/RepaymentItr1-hq.mp4" hasSound={false} />
 
         <p className="cs-body">But, there were problems</p>
 
-        <img src={img1} alt="App screen — revised concept" className="cs-mockup" />
-        <img src={img2} alt="App screen — revised concept 2" className="cs-mockup" />
+        <img src={img1} alt="App screen - revised concept" className="cs-mockup" />
+        <img src={img2} alt="App screen - revised concept 2" className="cs-mockup" />
 
         <p className="cs-body">
           But when we looked at it, something felt off. It wasn't really showing the user what
@@ -72,7 +59,7 @@ export default function CaseStudy() {
           few key frames to walk the team through the idea before final sign-off.
         </p>
 
-        <img src={img3} alt="App screen — final design" className="cs-mockup cs-mockup--tall" />
+        <img src={img3} alt="App screen - final design" className="cs-mockup cs-mockup--tall" />
 
       </div>
     </div>

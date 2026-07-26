@@ -151,27 +151,71 @@
   margin: 0;
 }
 
-/* Break out of the 640px .cs-content column toward 80% of the viewport, but
-   never wider than the content region (viewport minus the sidebar reserve and
-   the horizontal padding) so it can't slide under the sidebar, and never taller
-   than one screen. contain scales the asset down inside the box, preserving
-   ratio. margin-left centers on the column, translateX pulls back half the width
-   — and since the column is centered in the region, the mockup lands centered in
-   the region too. */
+/* Framed mockup panel (from Figma node 876:2716). Each mobile screen sits inside
+   a light-gray panel that spans the 640px content column, with the phone centered
+   and inset. The panel ratio (640×362) plus ~29px vertical padding reproduces the
+   phone-at-~84%-height proportion; object-fit:contain scales the asset to fit and
+   centers it horizontally, leaving the Figma whitespace on the sides. */
 .cs-mockup {
-  width: min(80vw, calc(100vw - 72px - var(--cs-sidebar)));
-  max-height: calc(100svh - var(--cs-pad-top) - var(--cs-pad-bottom));
-  height: auto;
+  width: 100%;
+  aspect-ratio: 640 / 362;
   object-fit: contain;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  box-sizing: border-box;
+  padding: 29px 24px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+/* Opt out of the fixed panel ratio. For very tall assets (storyboard strips),
+   a landscape panel starves height — let it grow to its natural aspect inside
+   the same framed panel instead. */
+.cs-mockup--tall {
+  aspect-ratio: auto;
+  height: auto;
+}
+
+/* Video mockup wrapper — holds the framed video plus its sound toggle. */
+.cs-video {
+  position: relative;
   display: block;
 }
 
-/* Opt out of the one-screen height cap. For very tall assets (storyboard strips),
-   the cap starves width — this trades scrolling for a readable size. */
-.cs-mockup--tall {
-  max-height: none;
+.cs-video .cs-mockup {
+  width: 100%;
+}
+
+/* Sound toggle, pinned to the bottom-right inside the panel. */
+.cs-video-sound {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(26, 26, 26, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0.85;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.cs-video-sound:hover {
+  opacity: 1;
+  background: rgba(26, 26, 26, 0.75);
+}
+
+.cs-video-sound:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
 }
 
 .cs-heading {
@@ -209,6 +253,15 @@
   color: #1a1a1a;
   margin: 0;
   padding-left: 24px;
+}
+
+.cs-list li + li {
+  margin-top: 16px;
+}
+
+/* Bold lead-in on a list item, with its description on the next line. */
+.cs-list-lead {
+  font-weight: 700;
 }
 
 /* Overview page --------------------------------------------------------- */

@@ -1,4 +1,5 @@
 import { usePageTransition } from './PageTransition.jsx'
+import cardRing from './assets/card-ring.png'
 import './App.css'
 
 const EXPERIENCE = [
@@ -31,10 +32,13 @@ function App() {
             onClick={() => go('/case-study/overview')}
           >
             <div className="project-text">
+              <p className="project-eyebrow">CASE STUDY #1<span className="eyebrow-sep">•</span>ZETA</p>
               <h2 className="project-title">Design for Delight</h2>
               <p className="project-desc">Enhanced the experience of rewards module for a US credit card app for near prime and prime users.</p>
             </div>
-            <div className="project-media" />
+            <div className="project-media">
+              <img className="project-media-img" src={cardRing} alt="" loading="lazy" />
+            </div>
           </article>
 
           <article
@@ -42,10 +46,13 @@ function App() {
             onClick={() => window.open('https://medium.com/@debrupanag/how-a-product-idea-nearly-doubled-the-chances-of-conversions-for-revenue-for-an-ed-tech-platform-b7ed758fe544?sharedUserId=debrupanag', '_blank', 'noopener,noreferrer')}
           >
             <div className="project-text">
+              <p className="project-eyebrow">CASE STUDY #2<span className="eyebrow-sep">•</span>CODECHEF</p>
               <h2 className="project-title">Design for Revenue</h2>
               <p className="project-desc">How Data-Driven Productisation Led to 2X Conversions in Ed-Tech Revenue Funnel</p>
             </div>
-            <div className="project-media" />
+            <div className="project-media">
+              <img className="project-media-img" src={cardRing} alt="" loading="lazy" />
+            </div>
           </article>
         </section>
 

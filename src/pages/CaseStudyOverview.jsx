@@ -21,7 +21,7 @@ export default function CaseStudyOverview() {
         </p>
         <p className="cs-overview-p">
           I worked on multiple flows of this product, but the work I'm most proud of are the
-          delight elements — the small, human moments layered into an otherwise functional,
+          delight elements - the small, human moments layered into an otherwise functional,
           transactional product. The case study ahead walks through three such moments, each its
           own design problem in making a financial interaction feel less like a task and more like
           a relationship:
