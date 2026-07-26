@@ -3,7 +3,7 @@ import cardRing from './assets/card-ring.png'
 import './App.css'
 
 const EXPERIENCE = [
-  { role: 'Zeta UX Designer - II', date: 'Dec 2024 – Present' },
+  { role: 'Zeta UX Designer - I', date: 'Dec 2024 – Present' },
   { role: 'CodeChef Product Designer', date: 'April 2023 – Dec 2024 · 1yr 9 mos' },
   { role: 'Groww Graphic Design Intern', date: 'Sep 2022 – Feb 2023 · 6 mos' },
 ]
