@@ -34,8 +34,8 @@ export default function CaseStudy() {
 
         <p className="cs-body">But, there were problems</p>
 
-        <img src={img1} alt="App screen - revised concept" className="cs-mockup" />
-        <img src={img2} alt="App screen - revised concept 2" className="cs-mockup" />
+        <img src={img1} alt="App screen - revised concept" className="cs-mockup cs-mockup--tight cs-mockup--tall" />
+        <img src={img2} alt="App screen - revised concept 2" className="cs-mockup cs-mockup--tight cs-mockup--tall" />
 
         <p className="cs-body">
           But when we looked at it, something felt off. It wasn't really showing the user what

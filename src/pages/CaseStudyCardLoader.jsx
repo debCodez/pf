@@ -18,7 +18,7 @@ export default function CaseStudyCardLoader() {
           Instead of one loading state, we built three:
         </p>
 
-        <CaseStudyVideo src="/loaderWeb.mp4" hasSound={false} />
+        <CaseStudyVideo src="/CardLoader.mp4" hasSound={false} />
 
         <ol className="cs-list">
           <li>

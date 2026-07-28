@@ -8,6 +8,7 @@ import CaseStudyRedeem from './pages/CaseStudyRedeem.jsx'
 import CaseStudyCardLoader from './pages/CaseStudyCardLoader.jsx'
 import CaseStudyOverview from './pages/CaseStudyOverview.jsx'
 import CaseStudyLayout from './pages/CaseStudyLayout.jsx'
+import CaseStudyAI from './pages/CaseStudyAI.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
 import ShaderBackground from './ShaderBackground.jsx'
 import { PageTransitionProvider } from './PageTransition.jsx'
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/case-study/redeem-points" element={<CaseStudyRedeem />} />
             <Route path="/case-study/card-issuance" element={<CaseStudyCardLoader />} />
           </Route>
+          <Route path="/case-study/design-with-ai" element={<CaseStudyAI />} />
         </Routes>
       </PageTransitionProvider>
     </BrowserRouter>

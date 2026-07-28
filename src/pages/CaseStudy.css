@@ -31,6 +31,57 @@
   opacity: 0.6;
 }
 
+/* Sits opposite the back arrow, on the white topbar. */
+.cs-resume {
+  margin-left: auto;
+  padding-right: 36px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.cs-resume:hover {
+  opacity: 1;
+}
+
+/* Prev / Next pair, sharing the resume link's slot on the right. */
+.cs-topbar-nav {
+  margin-left: auto;
+  padding-right: 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cs-navlink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.cs-navlink:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.cs-navlink:disabled {
+  cursor: default;
+  color: #9a9a9a;
+  opacity: 0.6;
+}
+
 /* Vertical hairline separating the sidebar panel from the content. */
 .cs-sidebar-divider {
   position: fixed;
@@ -127,7 +178,7 @@
 .cs-brief {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 }
 
 .cs-quote {
@@ -168,12 +219,34 @@
   border-radius: 4px;
 }
 
+/* Tighter inset so the artwork reads larger inside the same panel. */
+.cs-mockup--tight {
+  padding: 8px;
+}
+
 /* Opt out of the fixed panel ratio. For very tall assets (storyboard strips),
    a landscape panel starves height — let it grow to its natural aspect inside
    the same framed panel instead. */
 .cs-mockup--tall {
   aspect-ratio: auto;
   height: auto;
+}
+
+/* Lottie animation inside the framed panel. object-fit doesn't apply to a div,
+   so center the player in the padded box and let it scale to fit. */
+.cs-lottie-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-lottie {
+  width: 100%;
+  height: 100%;
+}
+
+.cs-lottie svg {
+  display: block;
 }
 
 /* Video mockup wrapper — holds the framed video plus its sound toggle. */
@@ -262,6 +335,43 @@
 /* Bold lead-in on a list item, with its description on the next line. */
 .cs-list-lead {
   font-weight: 700;
+}
+
+/* Design with AI page ---------------------------------------------------- */
+
+/* This case study has no sidebar, so it never reserves the left gutter. */
+.cs-page--full {
+  --cs-sidebar: 0px;
+}
+
+.cs-ai-project {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cs-ai-project + .cs-ai-project {
+  margin-top: 32px;
+}
+
+.cs-ai-kind {
+  font-family: 'Sedan', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.72px;
+  color: #1a1a1a;
+  margin: 8px 0 0;
+}
+
+.cs-ai-tools {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  opacity: 0.55;
+  margin: 0;
 }
 
 /* Overview page --------------------------------------------------------- */

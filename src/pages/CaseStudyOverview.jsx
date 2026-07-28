@@ -14,8 +14,8 @@ export default function CaseStudyOverview() {
     <div className="cs-page">
       <div className="cs-content">
         <p className="cs-overview-p">
-          Vera is Zeta's near-prime credit card product for the US market, built around its
-          flagship rewards programme. As a near-prime offering, Vera's biggest design challenge
+          Vera is Zeta's prime credit card product for the US market, built around its
+          flagship rewards programme. As a prime offering, Vera's biggest design challenge
           is not just rewarding spends, but also rewarding the right behaviours: on-time repayment
           often overlooked by traditional rewards structures.
         </p>

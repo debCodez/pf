@@ -27,6 +27,25 @@ body.is-transitioning .landing {
 /* Transparent window at the top — the background shader shows through here. */
 .landing-bar {
   height: 81px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 36px;
+}
+
+.landing-resume {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fafafa;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.landing-resume:hover {
+  opacity: 1;
 }
 
 /* Opaque surface that covers the shader behind the main content. */
@@ -53,7 +72,7 @@ body.is-transitioning .landing {
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: -1.08px;
-  margin: 0;
+  margin: 0 0 0 -6px;
 }
 
 .intro-body {
@@ -76,15 +95,17 @@ body.is-transitioning .landing {
   width: 640px;
   max-width: 100%;
   margin: 56px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  /* 1fr auto-rows makes every card match the tallest one, whatever the copy length. */
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 40px;
 }
 
 .project-card {
   display: flex;
   align-items: stretch;
   gap: 40px;
+  height: 240px;
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   overflow: hidden;
@@ -93,6 +114,32 @@ body.is-transitioning .landing {
 
 .project-card--clickable {
   cursor: pointer;
+}
+
+/* Spotlight: hovering a card fades everything else on the page back, so the
+   card being read is the only thing at full strength. */
+.intro,
+.experience,
+.landing-resume,
+.project-card {
+  transition: opacity 0.25s ease;
+}
+
+.landing:has(.project-card:hover) .intro,
+.landing:has(.project-card:hover) .experience,
+.landing:has(.project-card:hover) .landing-resume,
+.landing:has(.project-card:hover) .project-card:not(:hover) {
+  opacity: 0.1;
+}
+
+/* Opacity multiplies with the card's 10%, so 0.5 here lands the image at 5%.
+   Applied to the frame, not the <img>: the flipbook drives img opacity inline. */
+.project-media {
+  transition: opacity 0.25s ease;
+}
+
+.landing:has(.project-card:hover) .project-card:not(:hover) .project-media {
+  opacity: 0.5;
 }
 
 .project-text {
@@ -153,13 +200,28 @@ body.is-transitioning .landing {
   object-position: center;
 }
 
+/* Flipbook: every frame occupies the same box, only one is opaque at a time. */
+.project-media--stack {
+  position: relative;
+}
+
+.project-media--stack .project-media-img {
+  position: absolute;
+  inset: 0;
+}
+
 /* Experience list -------------------------------------------------------- */
 
 .experience {
   width: 640px;
   max-width: 100%;
   margin: 72px auto 0;
-  border-top: 1px solid #e5e5e5;
+}
+
+.exp-eyebrow {
+  padding: 0 28px 12px;
+  letter-spacing: 1.2px;
+  word-spacing: 0.35em;
 }
 
 .exp-row {
@@ -196,15 +258,20 @@ body.is-transitioning .landing {
     padding: 48px 20px 80px;
   }
 
+  .landing-bar {
+    padding: 0 20px;
+  }
+
   .projects {
-    flex-direction: column;
+    grid-auto-rows: auto;
     margin-top: 56px;
-    gap: 24px;
+    gap: 40px;
   }
 
   .project-card {
     flex-direction: column;
     gap: 0;
+    height: auto;
   }
 
   .project-text {
@@ -227,6 +294,10 @@ body.is-transitioning .landing {
     align-items: flex-start;
     gap: 4px;
     padding: 16px 4px;
+  }
+
+  .exp-eyebrow {
+    padding: 0 4px 12px;
   }
 
   .exp-date {

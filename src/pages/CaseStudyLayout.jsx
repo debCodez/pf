@@ -99,6 +99,19 @@ export default function CaseStudyLayout() {
             <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
+        {/* Only the last page of this study offers the jump to the next one. */}
+        {pathname === '/case-study/card-issuance' && (
+          <div className="cs-topbar-nav">
+            {/* Nothing precedes this study, so Prev is present but inert. */}
+            <button className="cs-navlink" disabled>Prev</button>
+            <button
+              className="cs-navlink"
+              onClick={() => navigate('/case-study/design-with-ai')}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
       <span className="cs-sidebar-divider" aria-hidden="true" />
       <nav className="cs-sidebar">

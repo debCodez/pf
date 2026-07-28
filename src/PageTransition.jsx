@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Lottie from './Lottie.jsx'
-import loaderAnimation from './assets/Loader-pofo.json'
+import loaderAnimation from './assets/cardLoader.json'
 import './PageTransition.css'
 
 const SLIDE_MS = 550 // white sheet clip open / close (must match CSS transition)
 const LOADER_IN_MS = 300 // loader fades in over the bare shader (must match CSS)
-const LOADER_PLAY_MS = 1000 // one full pass of Loader-pofo.json (30 frames @ 30fps)
+const LOADER_PLAY_MS = 1000 // one full pass of cardLoader.json (30 frames @ 30fps)
 const LOADER_OUT_MS = 300 // loader fades back out (must match CSS)
 const DISSOLVE_OUT_MS = 300 // fade of the landing content at the start (must match CSS)
 const DISSOLVE_MS = 650 // fade of the white to reveal the case study
