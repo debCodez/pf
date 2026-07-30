@@ -76,12 +76,14 @@ export default function CaseStudyAI() {
             </section>
           ))}
 
-          {/* End of the last study: Prev goes back to Vera, nothing follows. */}
+          {/* End of the last study: back to Vera, or out to the landing page. */}
           <nav className="cs-story-nav-inner cs-ai-nav">
             <button className="cs-navlink" onClick={() => navigate('/case-study')}>
               Prev
             </button>
-            <button className="cs-navlink" disabled>Next</button>
+            <button className="cs-navlink" onClick={() => navigate('/')}>
+              Home
+            </button>
           </nav>
         </div>
       </div>
