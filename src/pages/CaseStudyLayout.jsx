@@ -1,26 +1,37 @@
 import { useRef, useEffect, useState } from 'react'
-import { useNavigate, useLocation, Outlet } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
+import { SECTIONS as TABS, SECTION_IDS, scrollToSection } from './caseStudySections.js'
 import './CaseStudy.css'
-
-const TABS = [
-  { label: 'Overview', path: '/case-study/overview' },
-  { label: 'Points on bill payment', path: '/case-study/vera-repayments' },
-  { label: 'Redeeming reward points', path: '/case-study/redeem-points' },
-  { label: 'Card issuance loading animation', path: '/case-study/card-issuance' },
-]
 
 export default function CaseStudyLayout() {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
   const itemRefs = useRef([])
   const dotRef = useRef(null)
   const dotAnimRef = useRef(null)
   const currentPosRef = useRef(null)
   const [dotPos, setDotPos] = useState(null)
+  const [activeIdx, setActiveIdx] = useState(0)
 
-  const activeIdx = TABS.findIndex(t => t.path === pathname)
   const activeIdxRef = useRef(activeIdx)
   activeIdxRef.current = activeIdx
+
+  // Scroll spy: the section whose top most recently crossed the reading line
+  // owns the sidebar's active state.
+  useEffect(() => {
+    const READ_LINE = 0.35 // fraction of the viewport height
+    const onScroll = () => {
+      const line = window.innerHeight * READ_LINE
+      let idx = 0
+      SECTION_IDS.forEach((id, i) => {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= line) idx = i
+      })
+      setActiveIdx(idx)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     const el = itemRefs.current[activeIdx]
@@ -99,19 +110,6 @@ export default function CaseStudyLayout() {
             <path d="M19 12H5M5 12L11 6M5 12L11 18" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        {/* Only the last page of this study offers the jump to the next one. */}
-        {pathname === '/case-study/card-issuance' && (
-          <div className="cs-topbar-nav">
-            {/* Nothing precedes this study, so Prev is present but inert. */}
-            <button className="cs-navlink" disabled>Prev</button>
-            <button
-              className="cs-navlink"
-              onClick={() => navigate('/case-study/design-with-ai')}
-            >
-              Next
-            </button>
-          </div>
-        )}
       </div>
       <span className="cs-sidebar-divider" aria-hidden="true" />
       <nav className="cs-sidebar">
@@ -120,8 +118,8 @@ export default function CaseStudyLayout() {
             key={tab.label}
             ref={el => itemRefs.current[idx] = el}
             className={`cs-sidebar-item${idx === activeIdx ? ' cs-sidebar-item--active' : ''}`}
-            onClick={() => { if (tab.path && idx !== activeIdx) navigate(tab.path) }}
-            style={{ cursor: tab.path && idx !== activeIdx ? 'pointer' : 'default' }}
+            onClick={() => { if (idx !== activeIdx) scrollToSection(tab.id) }}
+            style={{ cursor: idx !== activeIdx ? 'pointer' : 'default' }}
           >
             {tab.label}
           </span>

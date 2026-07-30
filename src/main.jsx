@@ -1,12 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import CaseStudy from './pages/CaseStudy.jsx'
-import CaseStudyRedeem from './pages/CaseStudyRedeem.jsx'
-import CaseStudyCardLoader from './pages/CaseStudyCardLoader.jsx'
-import CaseStudyOverview from './pages/CaseStudyOverview.jsx'
+import CaseStudyStory from './pages/CaseStudyStory.jsx'
 import CaseStudyLayout from './pages/CaseStudyLayout.jsx'
 import CaseStudyAI from './pages/CaseStudyAI.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
@@ -22,11 +19,14 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route element={<CaseStudyLayout />}>
-            <Route path="/case-study/overview" element={<CaseStudyOverview />} />
-            <Route path="/case-study/vera-repayments" element={<CaseStudy />} />
-            <Route path="/case-study/redeem-points" element={<CaseStudyRedeem />} />
-            <Route path="/case-study/card-issuance" element={<CaseStudyCardLoader />} />
+            <Route path="/case-study" element={<CaseStudyStory />} />
           </Route>
+          {/* The study used to be four routes; keep those URLs working by
+              sending them to their section of the single scroll. */}
+          <Route path="/case-study/overview" element={<Navigate to="/case-study" replace />} />
+          <Route path="/case-study/vera-repayments" element={<Navigate to="/case-study#vera-repayments" replace />} />
+          <Route path="/case-study/redeem-points" element={<Navigate to="/case-study#redeem-points" replace />} />
+          <Route path="/case-study/card-issuance" element={<Navigate to="/case-study#card-issuance" replace />} />
           <Route path="/case-study/design-with-ai" element={<CaseStudyAI />} />
         </Routes>
       </PageTransitionProvider>

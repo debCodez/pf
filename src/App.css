@@ -26,26 +26,7 @@ body.is-transitioning .landing {
 
 /* Transparent window at the top — the background shader shows through here. */
 .landing-bar {
-  height: 81px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 36px;
-}
-
-.landing-resume {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #fafafa;
-  text-decoration: none;
-  opacity: 0.75;
-  transition: opacity 0.2s ease;
-}
-
-.landing-resume:hover {
-  opacity: 1;
+  height: 40px;
 }
 
 /* Opaque surface that covers the shader behind the main content. */
@@ -89,6 +70,20 @@ body.is-transitioning .landing {
   margin: 0;
 }
 
+/* Outbound link sitting inside body copy. Same ink as the text, set bold, with
+   the underline appearing only on hover. */
+.inline-link {
+  color: #1a1a1a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+
 /* Project cards ---------------------------------------------------------- */
 
 .projects {
@@ -120,14 +115,12 @@ body.is-transitioning .landing {
    card being read is the only thing at full strength. */
 .intro,
 .experience,
-.landing-resume,
 .project-card {
   transition: opacity 0.25s ease;
 }
 
 .landing:has(.project-card:hover) .intro,
 .landing:has(.project-card:hover) .experience,
-.landing:has(.project-card:hover) .landing-resume,
 .landing:has(.project-card:hover) .project-card:not(:hover) {
   opacity: 0.1;
 }
@@ -246,6 +239,35 @@ body.is-transitioning .landing {
   text-align: right;
 }
 
+/* Quick links: eyebrow over a single pipe-separated line, no row rules. */
+.quicklinks {
+  margin-top: 56px;
+}
+
+.quicklink-row {
+  padding: 0 28px;
+}
+
+.quicklink {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.quicklink:hover {
+  opacity: 0.6;
+}
+
+.quicklink-sep {
+  margin: 0 14px;
+  color: #1a1a1a;
+  opacity: 0.25;
+}
+
 /* Footer ----------------------------------------------------------------- */
 
 /* Transparent window at the bottom — the background shader shows through here. */
@@ -256,10 +278,6 @@ body.is-transitioning .landing {
 @media (max-width: 980px) {
   .landing-main {
     padding: 48px 20px 80px;
-  }
-
-  .landing-bar {
-    padding: 0 20px;
   }
 
   .projects {
@@ -298,6 +316,10 @@ body.is-transitioning .landing {
 
   .exp-eyebrow {
     padding: 0 4px 12px;
+  }
+
+  .quicklink-row {
+    padding: 0 4px;
   }
 
   .exp-date {

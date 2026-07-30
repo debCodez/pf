@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { usePageTransition } from './PageTransition.jsx'
-import ResumeLink from './ResumeLink.jsx'
-import cover from './assets/cover2.png'
+import { RESUME_URL } from './ResumeLink.jsx'
+import cover from './assets/cover4.png'
 import cover3 from './assets/cover3.png'
-import coverAi from './assets/card-ring.png'
+import coverAi from './assets/cover2.png'
 import shot1 from './assets/Shot1.png'
 import shot2 from './assets/Shot2.png'
 import shot3 from './assets/Shot3.png'
@@ -17,9 +17,18 @@ const FRAME_MS = 300
 const START_DELAY_MS = 500
 
 const EXPERIENCE = [
-  { role: 'Zeta UX Designer - I', date: 'Dec 2024 – Present' },
+  { role: 'Zeta UX Designer - II', date: 'July 2026 – Present' },
+  { role: 'Zeta UX Designer - I', date: 'Dec 2024 – July 2026 · 1yr 7 mos' },
   { role: 'CodeChef Product Designer', date: 'April 2023 – Dec 2024 · 1yr 9 mos' },
   { role: 'Groww Graphic Design Intern', date: 'Sep 2022 – Feb 2023 · 6 mos' },
+]
+
+const EMAIL = 'debrupanag003@gmail.com'
+
+const QUICK_LINKS = [
+  { label: 'Resume', href: RESUME_URL },
+  { label: 'Email', href: `mailto:${EMAIL}` },
+  { label: 'Substack', href: 'https://substack.com/@debrupanag/posts' },
 ]
 
 function App() {
@@ -55,15 +64,13 @@ function App() {
 
   return (
     <div className="landing">
-      <header className="landing-bar">
-        <ResumeLink className="landing-resume" />
-      </header>
+      <header className="landing-bar" />
 
       <main className="landing-main">
         <section className="intro">
           <h1 className="intro-title">Debrupa Nag</h1>
           <div className="intro-body">
-            <p>I'm a product designer currently working at Zeta. I have 3 years of experience, working on 0 → 1 projects as well as products focused on growth experiments.</p>
+            <p>I'm a product designer currently working at <a className="inline-link" href="https://www.zeta.tech/us/" target="_blank" rel="noopener noreferrer">Zeta</a>. I have 3 years of experience, working on 0→1 projects as well as products focused on growth experiments.</p>
             <p>I dive in first, figure it out along the way. I ask around, pull in the right people, solve things together.</p>
             <p>I believe in good storytelling. And in making experiences fun and immersive.<br />
             I love visual and motion-heavy craft. Always up for learning a new tool if the problem needs it.</p>
@@ -73,7 +80,7 @@ function App() {
         <section className="projects">
           <article
             className="project-card project-card--clickable"
-            onClick={() => go('/case-study/overview')}
+            onClick={() => go('/case-study')}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
           >
@@ -99,29 +106,29 @@ function App() {
 
           <article
             className="project-card project-card--clickable"
-            onClick={() => window.open('https://medium.com/@debrupanag/how-a-product-idea-nearly-doubled-the-chances-of-conversions-for-revenue-for-an-ed-tech-platform-b7ed758fe544?sharedUserId=debrupanag', '_blank', 'noopener,noreferrer')}
-          >
-            <div className="project-text">
-              <p className="project-eyebrow">CASE STUDY #2<span className="eyebrow-sep">•</span>CODECHEF</p>
-              <h2 className="project-title">Design for Revenue</h2>
-              <p className="project-desc">How Data-Driven Productisation Led to 2X Conversions in Ed-Tech Revenue Funnel</p>
-            </div>
-            <div className="project-media">
-              <img className="project-media-img" src={cover3} alt="" loading="lazy" />
-            </div>
-          </article>
-
-          <article
-            className="project-card project-card--clickable"
             onClick={() => go('/case-study/design-with-ai')}
           >
             <div className="project-text">
-              <p className="project-eyebrow">CASE STUDY #3<span className="eyebrow-sep">•</span>ZETA</p>
+              <p className="project-eyebrow">CASE STUDY #2<span className="eyebrow-sep">•</span>ZETA</p>
               <h2 className="project-title">Design with AI</h2>
               <p className="project-desc">Designing AI-driven workflows and internal tools that speed up how teams get work done.</p>
             </div>
             <div className="project-media">
               <img className="project-media-img" src={coverAi} alt="" loading="lazy" />
+            </div>
+          </article>
+
+          <article
+            className="project-card project-card--clickable"
+            onClick={() => window.open('https://medium.com/@debrupanag/how-a-product-idea-nearly-doubled-the-chances-of-conversions-for-revenue-for-an-ed-tech-platform-b7ed758fe544?sharedUserId=debrupanag', '_blank', 'noopener,noreferrer')}
+          >
+            <div className="project-text">
+              <p className="project-eyebrow">CASE STUDY #3<span className="eyebrow-sep">•</span>CODECHEF</p>
+              <h2 className="project-title">Design for Revenue</h2>
+              <p className="project-desc">How Data-Driven Productisation Led to 2X Conversions in Ed-Tech Revenue Funnel</p>
+            </div>
+            <div className="project-media">
+              <img className="project-media-img" src={cover3} alt="" loading="lazy" />
             </div>
           </article>
         </section>
@@ -134,6 +141,25 @@ function App() {
               <span className="exp-date">{date}</span>
             </div>
           ))}
+        </section>
+
+        <section className="experience quicklinks">
+          <p className="project-eyebrow exp-eyebrow">QUICK LINKS</p>
+          <div className="quicklink-row">
+            {QUICK_LINKS.map(({ label, href }, i) => (
+              <span key={label}>
+                {i > 0 && <span className="quicklink-sep" aria-hidden="true">|</span>}
+                <a
+                  className="quicklink"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {label}
+                </a>
+              </span>
+            ))}
+          </div>
         </section>
       </main>
 
