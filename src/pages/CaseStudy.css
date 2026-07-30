@@ -11,9 +11,11 @@
   height: 64px;
   display: flex;
   align-items: flex-start;
-  padding-top: 12px;
-  /* 28 + the button's own 8px inset lands the glyph on the sidebar's 36px edge. */
-  padding-left: 28px;
+  /* Sits low in the band so the button reads as part of the sidebar column
+     rather than floating alone at the top of the page. */
+  padding-top: 22px;
+  /* The disc has no inset of its own, so its edge meets the sidebar's 36px. */
+  padding-left: 36px;
   background: linear-gradient(
     to bottom,
     #ffffff 0%,
@@ -31,10 +33,14 @@
   pointer-events: auto;
 }
 
+/* Solid grey disc with a black arrow. */
 .cs-back {
-  background: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ececec;
   border: none;
-  padding: 8px;
+  padding: 0;
   margin: 0;
   cursor: pointer;
   display: flex;

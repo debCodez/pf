@@ -29,15 +29,16 @@ export default function CaseStudyStory() {
       return
     }
 
-    // Bottom margin of -75% leaves only the top quarter of the viewport as the
-    // observed band, so a part fires exactly as its top crosses that line.
+    // The observed band is the top half of the viewport, so a part reveals as
+    // its top crosses the middle of the screen — early enough that it is
+    // already there as you arrive, without appearing at the bottom edge.
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (!e.isIntersecting) return
         reveal(e.target)
         io.unobserve(e.target)
       }),
-      { rootMargin: '0px 0px -75% 0px' },
+      { rootMargin: '0px 0px -50% 0px' },
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
