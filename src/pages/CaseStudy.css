@@ -451,6 +451,21 @@
   width: 100%;
 }
 
+/* Label in the panel's top-left: a solid bar, then the text — no chrome behind
+   it, so it sits on the mockup like a title card. */
+.cs-video-caption {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding-left: 10px;
+  border-left: 4px solid #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #1a1a1a;
+}
+
 /* Sound toggle, pinned to the bottom-right inside the panel. */
 .cs-video-sound {
   position: absolute;

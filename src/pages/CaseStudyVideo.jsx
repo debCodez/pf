@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from 'react'
  * button lets the viewer opt into sound. React doesn't reliably reflect the
  * `muted` prop onto the element, so we drive it through the ref.
  */
-export default function CaseStudyVideo({ src, className = '', hasSound = true }) {
+export default function CaseStudyVideo({ src, className = '', hasSound = true, caption }) {
   const ref = useRef(null)
   const [muted, setMuted] = useState(true)
 
@@ -25,6 +25,7 @@ export default function CaseStudyVideo({ src, className = '', hasSound = true })
         muted
         playsInline
       />
+      {caption && <span className="cs-video-caption">{caption}</span>}
       {hasSound && (
       <button
         type="button"

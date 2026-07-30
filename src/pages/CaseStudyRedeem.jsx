@@ -1,6 +1,5 @@
 import './CaseStudy.css'
 import CaseStudyVideo from './CaseStudyVideo.jsx'
-import redeem2 from '../assets/redeem2.png'
 
 export default function CaseStudyRedeem() {
   return (
@@ -26,7 +25,7 @@ export default function CaseStudyRedeem() {
           There's a waiting period in the redemption flow - the app needs a few seconds to process the redeemed money.
         </p>
 
-        <img src={redeem2} alt="App screen - first iteration" className="cs-mockup" />
+        <CaseStudyVideo src="/olditr.mp4" hasSound={false} caption="Old version" />
 
         <p className="cs-body">
           Our animation wasn't built around that, so it ended up feeling awkward for the user rather than smooth.
