@@ -47,6 +47,14 @@ body.is-transitioning .landing {
   color: #1a1a1a;
 }
 
+.profile-pic {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+
 .intro-title {
   font-family: 'Sedan', serif;
   font-weight: 400;

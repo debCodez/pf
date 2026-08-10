@@ -8,6 +8,7 @@ import shot1 from './assets/Shot1.png'
 import shot2 from './assets/Shot2.png'
 import shot3 from './assets/Shot3.png'
 import shot4 from './assets/Shot4.png'
+import profilePic from './assets/profile.jpg'
 import './App.css'
 
 /* The cover rests at index 0; hovering flips through the shots that follow it. */
@@ -68,6 +69,7 @@ function App() {
 
       <main className="landing-main">
         <section className="intro">
+          <img className="profile-pic" src={profilePic} alt="Debrupa Nag" />
           <h1 className="intro-title">Debrupa Nag</h1>
           <div className="intro-body">
             <p>I'm a product designer currently working at <a className="inline-link" href="https://www.zeta.tech/us/" target="_blank" rel="noopener noreferrer">Zeta</a>. I have 3 years of experience, working on 0→1 projects as well as products focused on growth experiments.</p>
