@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CaseStudyVideo from './CaseStudyVideo.jsx'
 import './CaseStudy.css'
@@ -46,34 +47,38 @@ export default function CaseStudyAI() {
       {/* No sidebar on this case study, so the content keeps the full width. */}
       <div className="cs-page cs-page--full">
         <div className="cs-content">
-          {PROJECTS.map(({ kind, body, tools, video, image, alt, link, panel }) => (
-            <section className="cs-ai-project" key={kind}>
-              {video && (
-                <CaseStudyVideo
-                  src={video}
-                  hasSound={false}
-                  className={`cs-mockup--flush ${panel || ''}`.trim()}
-                />
-              )}
-              {image && (
-                <img src={image} alt={alt} className="cs-mockup cs-mockup--tight" />
-              )}
-              {/* Placeholder panel — swap for an image or video like the ones above. */}
-              {!video && !image && <div className="cs-mockup" aria-hidden="true" />}
-              <h2 className="cs-ai-kind">{kind}</h2>
-              <p className="cs-body">{body}</p>
-              <p className="cs-ai-tools">({tools})</p>
-              {link && (
-                <a
-                  className="cs-ai-link"
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {link.text}
-                </a>
-              )}
-            </section>
+          <h1 className="cs-title">Design with AI</h1>
+          {PROJECTS.map(({ kind, body, tools, video, image, alt, link, panel }, i) => (
+            <Fragment key={kind}>
+              <section className="cs-ai-project">
+                {video && (
+                  <CaseStudyVideo
+                    src={video}
+                    hasSound={false}
+                    className={`cs-mockup--flush ${panel || ''}`.trim()}
+                  />
+                )}
+                {image && (
+                  <img src={image} alt={alt} className="cs-mockup cs-mockup--tight" />
+                )}
+                {/* Placeholder panel — swap for an image or video like the ones above. */}
+                {!video && !image && <div className="cs-mockup" aria-hidden="true" />}
+                <h2 className="cs-ai-kind">{kind}</h2>
+                <p className="cs-body">{body}</p>
+                <p className="cs-ai-tools">({tools})</p>
+                {link && (
+                  <a
+                    className="cs-ai-link"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.text}
+                  </a>
+                )}
+              </section>
+              {i < PROJECTS.length - 1 && <hr className="cs-ai-divider" />}
+            </Fragment>
           ))}
 
           {/* End of the last study: back to Vera, or out to the landing page. */}

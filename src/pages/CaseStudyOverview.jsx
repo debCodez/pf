@@ -11,6 +11,7 @@ export default function CaseStudyOverview() {
   return (
     <div className="cs-page">
       <div className="cs-content">
+        <h1 className="cs-title">Design for Delight</h1>
         <p className="cs-overview-p">
           Vera is Zeta's prime credit card product for the US market, built around its
           flagship rewards programme. As a prime offering, Vera's biggest design challenge
