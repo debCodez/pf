@@ -84,13 +84,13 @@ export default function CaseStudyStory() {
         </section>
       ))}
 
-      {/* End of the study: Prev is inert since nothing precedes it. */}
+      {/* End of the study: first in the sequence, so Home stands in for Prev. */}
       <nav className="cs-story-nav">
         <div className="cs-story-nav-inner">
-          <button className="cs-navlink" disabled>Prev</button>
+          <button className="cs-navlink" onClick={() => navigate('/')}>Home</button>
           <button
             className="cs-navlink"
-            onClick={() => navigate('/case-study/design-with-ai')}
+            onClick={() => navigate('/case-study/interactions')}
           >
             Next
           </button>

@@ -388,7 +388,7 @@
   padding: 29px 24px;
   background: #fafafa;
   border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  border-radius: 32px;
 }
 
 /* Tighter inset so the artwork reads larger inside the same panel. */
@@ -617,6 +617,30 @@
 }
 
 /* Overview page --------------------------------------------------------- */
+
+/* Project meta row (Figma node 926:9072): Org / Client / TAT, pipe-separated.
+   The separator's 0.2 opacity is nested inside the row's own 0.6, compounding
+   to the ~0.33 that reads as 0.2 against the page. */
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.cs-meta strong {
+  font-weight: 600;
+}
+
+.cs-meta-sep {
+  opacity: 0.33;
+}
 
 .cs-overview-p {
   font-family: 'Inter', sans-serif;

@@ -24,9 +24,29 @@ body.is-transitioning .landing {
   visibility: hidden;
 }
 
-/* Transparent window at the top — the background shader shows through here. */
 .landing-bar {
-  height: 40px;
+  height: 0;
+}
+
+/* Persistent CTA, pinned to the viewport so it's reachable from anywhere on the page. */
+.resume-cta {
+  position: fixed;
+  top: 24px;
+  right: 36px;
+  z-index: 55;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.resume-cta:hover {
+  opacity: 0.8;
 }
 
 /* Opaque surface that covers the shader behind the main content. */
@@ -38,7 +58,7 @@ body.is-transitioning .landing {
 /* Intro ------------------------------------------------------------------ */
 
 .intro {
-  width: 640px;
+  width: 928px;
   max-width: 100%;
   margin: 0 auto;
   display: flex;
@@ -92,68 +112,116 @@ body.is-transitioning .landing {
 }
 
 
-/* Project cards ---------------------------------------------------------- */
+/* Feature card (Figma node 923:7251): phone shot on top, text panel below. */
 
-.projects {
-  width: 640px;
+/* Element-qualified so it wins over .project-eyebrow's margin: 0, which is
+   declared later in this file at equal specificity. */
+p.feature-eyebrow {
+  width: 928px;
   max-width: 100%;
-  margin: 56px auto 0;
-  /* 1fr auto-rows makes every card match the tallest one, whatever the copy length. */
+  margin: 56px auto 28px;
+}
+
+/* Two-up grid; collapses to one column on narrow screens (see media query below). */
+.feature {
+  width: 928px;
+  max-width: 100%;
+  margin: 0 auto;
   display: grid;
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 40px;
 }
 
-.project-card {
+.feature-card {
   display: flex;
-  align-items: stretch;
-  gap: 40px;
-  height: 240px;
+  flex-direction: column;
   border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  border-radius: 32px;
   overflow: hidden;
-  background: #fafafa;
+  cursor: pointer;
+  background: #fff;
 }
 
-.project-card--clickable {
-  cursor: pointer;
+/* The thumbnail: full-bleed, sized to the shots' own aspect ratio (they already
+   carry their own background art, so no padding/background frame is added here). */
+.feature-card-media {
+  width: 100%;
+  aspect-ratio: 1890 / 1332;
+  background: #f3f3f3;
+  overflow: hidden;
+}
+
+.feature-card-phone {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Flipbook: every frame occupies the same box, only one is opaque at a time. */
+.feature-card-media--stack {
+  position: relative;
+}
+
+.feature-card-media--stack .feature-card-phone {
+  position: absolute;
+  inset: 0;
+}
+
+.feature-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 32px;
+}
+
+.feature-card-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.feature-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  opacity: 0.6;
+  margin: 0;
 }
 
 /* Spotlight: hovering a card fades everything else on the page back, so the
    card being read is the only thing at full strength. */
 .intro,
+.feature-eyebrow,
 .experience,
-.project-card {
+.feature-card {
   transition: opacity 0.25s ease;
 }
 
-.landing:has(.project-card:hover) .intro,
-.landing:has(.project-card:hover) .experience,
-.landing:has(.project-card:hover) .project-card:not(:hover) {
+.landing:has(.feature-card:hover) .intro,
+.landing:has(.feature-card:hover) .feature-eyebrow,
+.landing:has(.feature-card:hover) .experience,
+.landing:has(.feature-card:hover) .feature-card:not(:hover) {
   opacity: 0.1;
 }
 
 /* Opacity multiplies with the card's 10%, so 0.5 here lands the image at 5%.
    Applied to the frame, not the <img>: the flipbook drives img opacity inline. */
-.project-media {
+.feature-card-media {
   transition: opacity 0.25s ease;
 }
 
-.landing:has(.project-card:hover) .project-card:not(:hover) .project-media {
+.landing:has(.feature-card:hover) .feature-card:not(:hover) .feature-card-media {
   opacity: 0.5;
 }
 
-.project-text {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  padding: 28px 0 28px 40px;
-  color: #1a1a1a;
-}
-
+/* Shared eyebrow label (also used above the feature cards and work-experience list). */
 .project-eyebrow {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -164,57 +232,10 @@ body.is-transitioning .landing {
   margin: 0;
 }
 
-.eyebrow-sep {
-  margin: 0 8px;
-}
-
-.project-title {
-  font-family: 'Sedan', serif;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 1.2;
-  letter-spacing: -1.08px;
-  margin: 0;
-}
-
-.project-desc {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.project-media {
-  flex-shrink: 0;
-  width: 240px;
-  align-self: stretch;
-  min-height: 200px;
-  overflow: hidden;
-}
-
-.project-media-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Flipbook: every frame occupies the same box, only one is opaque at a time. */
-.project-media--stack {
-  position: relative;
-}
-
-.project-media--stack .project-media-img {
-  position: absolute;
-  inset: 0;
-}
-
 /* Experience list -------------------------------------------------------- */
 
 .experience {
-  width: 640px;
+  width: 928px;
   max-width: 100%;
   margin: 72px auto 0;
 }
@@ -263,11 +284,59 @@ body.is-transitioning .landing {
   line-height: 1.5;
   color: #1a1a1a;
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   transition: opacity 0.15s ease;
 }
 
 .quicklink:hover {
   opacity: 0.6;
+}
+
+.quicklink--copy {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* The tooltip is this button's own hover affordance, so it skips the generic dim. */
+.quicklink--copy:hover {
+  opacity: 1;
+}
+
+.quicklink-copy-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Tooltip: hidden until the button is hovered, and while hovered it also
+   reflects the copied state instantly (no separate transition delay needed,
+   since the label swap happens in the same paint as the opacity fade-in). */
+.quicklink-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.quicklink--copy:hover .quicklink-tooltip {
+  opacity: 1;
 }
 
 .quicklink-sep {
@@ -283,32 +352,73 @@ body.is-transitioning .landing {
   height: 70px;
 }
 
+/* Ghost cursor (Figma node 930:9798): a "View case study" pill that follows the
+   pointer over a case-study card, sitting 16px to its right. The outer element
+   tracks position via transform (no transition, so it never lags the pointer);
+   the inner pill only transitions opacity/scale for the show/hide fade. */
+.ghost-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* 14px vertical padding + a 20px content row = 48px tall. */
+.ghost-cursor-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px 14px 24px;
+  border-radius: 999px;
+  background: #1a1a1a;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.92);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.ghost-cursor-pill--active {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.ghost-cursor-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #fff;
+  margin: 0;
+}
+
+.ghost-cursor-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* No real pointer to follow on touch devices. */
+@media (hover: none) {
+  .ghost-cursor {
+    display: none;
+  }
+}
+
 @media (max-width: 980px) {
   .landing-main {
     padding: 48px 20px 80px;
   }
 
-  .projects {
-    grid-auto-rows: auto;
-    margin-top: 56px;
-    gap: 40px;
+  .resume-cta {
+    top: 16px;
+    right: 20px;
+    padding: 10px 18px;
   }
 
-  .project-card {
-    flex-direction: column;
-    gap: 0;
-    height: auto;
-  }
-
-  .project-text {
-    padding: 32px 24px;
-    order: 2;
-  }
-
-  .project-media {
-    width: 100%;
-    min-height: 240px;
-    order: 1;
+  .feature {
+    grid-template-columns: 1fr;
   }
 
   .experience {

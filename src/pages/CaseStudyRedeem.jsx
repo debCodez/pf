@@ -12,10 +12,7 @@ export default function CaseStudyRedeem() {
             Redeeming reward points take time to process. Make the wait feel delightful. Not like a friction.
           </p>
         </div>
-
-        <CaseStudyVideo src="/RedemptionFinal.mp4" />
-
-        <h2 className="cs-heading">Backstory &amp; Process</h2>
+        {/* <h2 className="cs-heading">Backstory &amp; Process</h2> */}
 
         <p className="cs-body">
           The redemption animation followed a very similar path - story first, visuals next, then animation.
@@ -39,6 +36,8 @@ export default function CaseStudyRedeem() {
           Once we had a direction that felt right, we put together some visual frames for the team to review.
           After that, we built the full animation and stitched the whole flow together with sound and haptics.
         </p>
+        <CaseStudyVideo src="/RedemptionFinal.mp4" />
+
 
       </div>
     </div>

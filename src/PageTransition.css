@@ -13,16 +13,16 @@
   pointer-events: none;
 }
 
-/* White sheet. It starts covering only the middle, leaving the top and footer
-   shader peeks uncovered, so those peeks expand to full screen as the sheet
-   clips open toward the center. The insets must match .landing-bar (40px) and
+/* White sheet. It starts covering everything down to the footer, leaving only
+   the footer shader peek uncovered, so that peek expands to full screen as the
+   sheet clips open toward the center. The bottom inset must match
    .landing-footer (70px) exactly, or the sheet's edge sits off the dark band. */
 .transition-sheet {
   position: absolute;
   inset: 0;
   background: #fafafa;
   opacity: 1;
-  clip-path: inset(40px 0 70px 0);
+  clip-path: inset(0 0 70px 0);
   transition: clip-path 0.55s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s ease;
 }
 
@@ -60,7 +60,7 @@
    .landing-footer down to 50px. */
 @media (max-width: 980px) {
   .transition-sheet {
-    clip-path: inset(40px 0 50px 0);
+    clip-path: inset(0 0 50px 0);
   }
 }
 

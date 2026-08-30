@@ -81,9 +81,10 @@ export default function CaseStudyAI() {
             </Fragment>
           ))}
 
-          {/* End of the last study: back to Vera, or out to the landing page. */}
+          {/* End of the last study: back to Interactions, or out to the landing page
+              (last in the sequence, so Home stands in for Next). */}
           <nav className="cs-story-nav-inner cs-ai-nav">
-            <button className="cs-navlink" onClick={() => navigate('/case-study')}>
+            <button className="cs-navlink" onClick={() => navigate('/case-study/interactions')}>
               Prev
             </button>
             <button className="cs-navlink" onClick={() => navigate('/')}>
