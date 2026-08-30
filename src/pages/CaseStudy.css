@@ -466,11 +466,17 @@
   color: #1a1a1a;
 }
 
-/* Sound toggle, pinned to the bottom-right inside the panel. */
-.cs-video-sound {
+/* Restart / sound / enlarge, stacked vertically in the bottom-right corner. */
+.cs-video-controls {
   position: absolute;
   right: 16px;
   bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-video-btn {
   width: 36px;
   height: 36px;
   display: flex;
@@ -488,14 +494,74 @@
   transition: opacity 0.15s ease, background 0.15s ease;
 }
 
-.cs-video-sound:hover {
+.cs-video-btn:hover {
   opacity: 1;
   background: rgba(26, 26, 26, 0.75);
 }
 
-.cs-video-sound:focus-visible {
+.cs-video-btn:focus-visible {
   outline: 2px solid #1a1a1a;
   outline-offset: 2px;
+}
+
+/* Enlarged video modal. */
+.cs-video-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 5vw;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 200;
+  cursor: zoom-out;
+}
+
+/* The grey frame: padding here is the gap between the phone video and the
+   frame's own edge (distinct from .cs-video-overlay's padding, which is the
+   gap between the frame and the screen edge). */
+.cs-video-modal {
+  position: relative;
+  width: min(960px, 100%);
+  max-height: calc(100vh - 96px);
+  box-sizing: border-box;
+  padding: 32px;
+  border-radius: 32px;
+  background: #fafafa;
+  overflow: hidden;
+  cursor: default;
+  /* The overlay centers short content and scrolls to reach the rest of
+     anything taller, so this can't collapse below its own content. */
+  margin: auto;
+  flex-shrink: 0;
+}
+
+.cs-video-modal-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 160px);
+}
+
+/* Tall storyboard-style images: let the frame grow to the image's full
+   height and scroll the overlay instead of squeezing it down to fit. */
+.cs-video-modal--scroll {
+  max-height: none;
+  overflow: visible;
+}
+
+.cs-image-modal-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Pinned to the viewport (not the frame) so it stays reachable while a tall,
+   scrollable image's frame extends past the screen. */
+.cs-video-controls--fixed {
+  position: fixed;
 }
 
 .cs-heading {

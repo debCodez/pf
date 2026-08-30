@@ -1,5 +1,6 @@
 import './CaseStudy.css'
 import CaseStudyVideo from './CaseStudyVideo.jsx'
+import CaseStudyImage from './CaseStudyImage.jsx'
 import img1 from '../assets/1.png'
 import img2 from '../assets/2.png'
 import img3 from '../assets/3.1.png'
@@ -34,8 +35,8 @@ export default function CaseStudy() {
 
         <p className="cs-body">But, there were problems</p>
 
-        <img src={img1} alt="App screen - revised concept" className="cs-mockup cs-mockup--tight cs-mockup--tall" />
-        <img src={img2} alt="App screen - revised concept 2" className="cs-mockup cs-mockup--tight cs-mockup--tall" />
+        <CaseStudyImage src={img1} alt="App screen - revised concept" className="cs-mockup--tight cs-mockup--tall" />
+        <CaseStudyImage src={img2} alt="App screen - revised concept 2" className="cs-mockup--tight cs-mockup--tall" />
 
         <p className="cs-body">
           But when we looked at it, something felt off. It wasn't really showing the user what
@@ -59,7 +60,7 @@ export default function CaseStudy() {
           few key frames to walk the team through the idea before final sign-off.
         </p>
 
-        <img src={img3} alt="App screen - final design" className="cs-mockup cs-mockup--tall" />
+        <CaseStudyImage src={img3} alt="App screen - final design" className="cs-mockup--tall" />
 
       </div>
     </div>

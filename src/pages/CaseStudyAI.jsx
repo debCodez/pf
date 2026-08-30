@@ -55,6 +55,7 @@ export default function CaseStudyAI() {
                   <CaseStudyVideo
                     src={video}
                     hasSound={false}
+                    showRestart={false}
                     className={`cs-mockup--flush ${panel || ''}`.trim()}
                   />
                 )}
