@@ -391,6 +391,11 @@
   border-radius: 32px;
 }
 
+/* Clicking the image itself enlarges it too, not just its corner button. */
+.cs-mockup--clickable {
+  cursor: zoom-in;
+}
+
 /* Tighter inset so the artwork reads larger inside the same panel. */
 .cs-mockup--tight {
   padding: 8px;
@@ -558,10 +563,34 @@
   height: auto;
 }
 
-/* Pinned to the viewport (not the frame) so it stays reachable while a tall,
-   scrollable image's frame extends past the screen. */
-.cs-video-controls--fixed {
-  position: fixed;
+/* Close, sitting just outside the frame's top-right corner — 32px clear of
+   the frame's right edge (36px button + 32px gap), aligned to the frame
+   itself rather than the screen so it stays visually anchored to it. */
+.cs-image-modal-close {
+  position: absolute;
+  top: 0;
+  right: -68px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cs-image-modal-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.cs-image-modal-close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 .cs-heading {
