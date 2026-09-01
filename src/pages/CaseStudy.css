@@ -527,18 +527,20 @@
 /* The grey frame: padding here is the gap between the phone video and the
    frame's own edge (distinct from .cs-video-overlay's padding, which is the
    gap between the frame and the screen edge). */
+/* No max-height: the frame's size comes from its fixed width (960px cap)
+   and the media's own aspect ratio, never from the viewport, so it stays
+   the same size on every screen. Most of these are ~2:1 portrait phone
+   recordings, so at full width they're routinely taller than the viewport
+   — the overlay scrolls to reach the rest instead of the frame shrinking. */
 .cs-video-modal {
   position: relative;
   width: min(960px, 100%);
-  max-height: calc(100vh - 96px);
   box-sizing: border-box;
   padding: 32px;
   border-radius: 32px;
   background: #fafafa;
   overflow: hidden;
   cursor: default;
-  /* The overlay centers short content and scrolls to reach the rest of
-     anything taller, so this can't collapse below its own content. */
   margin: auto;
   flex-shrink: 0;
 }
@@ -547,14 +549,6 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: calc(100vh - 160px);
-}
-
-/* Tall storyboard-style images: let the frame grow to the image's full
-   height and scroll the overlay instead of squeezing it down to fit. */
-.cs-video-modal--scroll {
-  max-height: none;
-  overflow: visible;
 }
 
 .cs-image-modal-img {
@@ -677,11 +671,11 @@
 .cs-ai-kind {
   font-family: 'Sedan', serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 36px;
   line-height: 1.2;
-  letter-spacing: -0.72px;
+  letter-spacing: -1.08px;
   color: #1a1a1a;
-  margin: 8px 0 0;
+  margin: 0;
 }
 
 /* Link out to a live tool, sitting under its project. Bold like the inline

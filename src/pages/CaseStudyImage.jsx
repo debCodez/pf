@@ -38,7 +38,7 @@ export default function CaseStudyImage({ src, alt = '', className = '' }) {
 
       {expanded && createPortal(
         <div className="cs-video-overlay" onClick={() => setExpanded(false)}>
-          <div className="cs-video-modal cs-video-modal--scroll" onClick={(e) => e.stopPropagation()}>
+          <div className="cs-video-modal" onClick={(e) => e.stopPropagation()}>
             <img src={src} alt={alt} className="cs-image-modal-img" />
             <button
               type="button"

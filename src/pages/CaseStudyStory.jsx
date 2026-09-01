@@ -84,15 +84,14 @@ export default function CaseStudyStory() {
         </section>
       ))}
 
-      {/* End of the study: first in the sequence, so Home stands in for Prev. */}
+      {/* End of the study: always just a way forward to the next project. */}
       <nav className="cs-story-nav">
         <div className="cs-story-nav-inner">
-          <button className="cs-navlink" onClick={() => navigate('/')}>Home</button>
           <button
             className="cs-navlink"
             onClick={() => navigate('/case-study/interactions')}
           >
-            Next
+            Next project
           </button>
         </div>
       </nav>

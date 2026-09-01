@@ -59,11 +59,8 @@ export default function CaseStudyInteractions() {
           <CaseStudyVideo src="/Lumen-CLI.mp4" hasSound={false} />
 
           <nav className="cs-story-nav-inner cs-ai-nav">
-            <button className="cs-navlink" onClick={() => navigate('/case-study')}>
-              Prev
-            </button>
             <button className="cs-navlink" onClick={() => navigate('/case-study/design-with-ai')}>
-              Next
+              Next project
             </button>
           </nav>
         </div>

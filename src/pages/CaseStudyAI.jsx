@@ -48,9 +48,25 @@ export default function CaseStudyAI() {
       <div className="cs-page cs-page--full">
         <div className="cs-content">
           <h1 className="cs-title">Design with AI</h1>
+          <p className="cs-body">
+            Prototyping, building, and shipping product and internal tools faster with AI-assisted workflows.
+          </p>
           {PROJECTS.map(({ kind, body, tools, video, image, alt, link, panel }, i) => (
             <Fragment key={kind}>
               <section className="cs-ai-project">
+                <h2 className="cs-ai-kind">{i + 1}. {kind}</h2>
+                <p className="cs-body">{body}</p>
+                <p className="cs-ai-tools">({tools})</p>
+                {link && (
+                  <a
+                    className="cs-ai-link"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.text}
+                  </a>
+                )}
                 {video && (
                   <CaseStudyVideo
                     src={video}
@@ -64,32 +80,15 @@ export default function CaseStudyAI() {
                 )}
                 {/* Placeholder panel — swap for an image or video like the ones above. */}
                 {!video && !image && <div className="cs-mockup" aria-hidden="true" />}
-                <h2 className="cs-ai-kind">{kind}</h2>
-                <p className="cs-body">{body}</p>
-                <p className="cs-ai-tools">({tools})</p>
-                {link && (
-                  <a
-                    className="cs-ai-link"
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.text}
-                  </a>
-                )}
               </section>
               {i < PROJECTS.length - 1 && <hr className="cs-ai-divider" />}
             </Fragment>
           ))}
 
-          {/* End of the last study: back to Interactions, or out to the landing page
-              (last in the sequence, so Home stands in for Next). */}
+          {/* Last in the sequence: loop back around to the first project. */}
           <nav className="cs-story-nav-inner cs-ai-nav">
-            <button className="cs-navlink" onClick={() => navigate('/case-study/interactions')}>
-              Prev
-            </button>
-            <button className="cs-navlink" onClick={() => navigate('/')}>
-              Home
+            <button className="cs-navlink" onClick={() => navigate('/case-study')}>
+              Next project
             </button>
           </nav>
         </div>
