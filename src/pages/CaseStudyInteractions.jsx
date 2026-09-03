@@ -32,7 +32,7 @@ export default function CaseStudyInteractions() {
           <ul className="cs-list">
             <li>
               <strong>Hypothesis:</strong> users think in whole numbers. Granular control
-              (decimals, sliders, fine increments) is overkill, keep the input dead simple.
+              (decimals, non-rounded numbers) is overkill, keep the input dead simple.
             </li>
             <li>
               <strong>Edge case to handle:</strong> if a user's already spent up to their limit
