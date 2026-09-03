@@ -95,11 +95,12 @@ export default function CaseStudyVideo({ src, className = '', hasSound = true, s
       <video
         ref={ref}
         src={src}
-        className={`cs-mockup ${className}`.trim()}
+        className={`cs-mockup cs-mockup--clickable ${className}`.trim()}
         autoPlay
         loop
         muted
         playsInline
+        onClick={() => setExpanded(true)}
       />
       {caption && <span className="cs-video-caption">{caption}</span>}
 
@@ -115,7 +116,7 @@ export default function CaseStudyVideo({ src, className = '', hasSound = true, s
 
       {expanded && createPortal(
         <div className="cs-video-overlay" onClick={() => setExpanded(false)}>
-          <div className="cs-video-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="cs-video-modal cs-video-modal--video" onClick={(e) => e.stopPropagation()}>
             <video
               ref={modalRef}
               src={src}

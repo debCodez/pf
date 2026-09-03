@@ -526,12 +526,11 @@
 
 /* The grey frame: padding here is the gap between the phone video and the
    frame's own edge (distinct from .cs-video-overlay's padding, which is the
-   gap between the frame and the screen edge). */
-/* No max-height: the frame's size comes from its fixed width (960px cap)
-   and the media's own aspect ratio, never from the viewport, so it stays
-   the same size on every screen. Most of these are ~2:1 portrait phone
-   recordings, so at full width they're routinely taller than the viewport
-   — the overlay scrolls to reach the rest instead of the frame shrinking. */
+   gap between the frame and the screen edge). No max-height by default: the
+   frame grows to fit its content (mainly tall storyboard images) and the
+   overlay scrolls to reach the rest, rather than shrinking it down.
+   overflow: visible (not hidden) so the close button below, which sits
+   outside the frame's own box, isn't clipped. */
 .cs-video-modal {
   position: relative;
   width: min(960px, 100%);
@@ -539,16 +538,31 @@
   padding: 32px;
   border-radius: 32px;
   background: #fafafa;
-  overflow: hidden;
+  overflow: visible;
   cursor: default;
   margin: auto;
   flex-shrink: 0;
 }
 
-.cs-video-modal-video {
+/* Video only: close to .cs-mockup's minimised-state panel ratio (640:362),
+   slightly taller so the phone doesn't touch the frame's top/bottom edge,
+   with extra vertical padding (vs. the base rule's uniform 32px) reinforcing
+   that same gap. Sized to always fit inside the viewport (no scrolling),
+   unlike the image frame above. Everything here (cap, padding, radius) is
+   the base panel's numbers scaled up 1.25x. */
+.cs-video-modal--video {
+  width: min(1200px, 90vw, calc((100vh - 96px) * 640 / 390));
+  aspect-ratio: 640 / 390;
+  padding: 55px 40px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.cs-video-modal--video .cs-video-modal-video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cs-image-modal-img {
@@ -557,13 +571,13 @@
   height: auto;
 }
 
-/* Close, sitting just outside the frame's top-right corner — 32px clear of
-   the frame's right edge (36px button + 32px gap), aligned to the frame
-   itself rather than the screen so it stays visually anchored to it. */
+/* Pinned to the screen's own top-right corner (not the frame), so it stays
+   reachable in the same spot on screen while a tall image's frame scrolls
+   underneath it. */
 .cs-image-modal-close {
-  position: absolute;
-  top: 0;
-  right: -68px;
+  position: fixed;
+  top: 24px;
+  right: 24px;
   width: 36px;
   height: 36px;
   display: flex;
