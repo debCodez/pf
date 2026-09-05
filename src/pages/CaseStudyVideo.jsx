@@ -77,6 +77,16 @@ export default function CaseStudyVideo({ src, className = '', hasSound = true, s
     if (ref.current) ref.current.muted = muted
   }, [muted])
 
+  // Pauses the background preview while the modal is open so only one audio track plays.
+  useEffect(() => {
+    if (!ref.current) return
+    if (expanded) {
+      ref.current.pause()
+    } else {
+      ref.current.play().catch(() => {})
+    }
+  }, [expanded])
+
   // Locks background scroll while the modal is open, and lets Escape close it.
   useEffect(() => {
     if (!expanded) return
